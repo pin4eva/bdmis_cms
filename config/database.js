@@ -13,7 +13,7 @@ module.exports = ({ env }) => {
             port: env.int("DATABASE_PORT", 27017),
             database: env("DATABASE_NAME", "brighter_dawn_cms"),
             username: env("DATABASE_USERNAME", "peter"),
-            password: env("DATABASE_PASSWORD", "ifeanyi123"),
+            password: env("DATABASE_PASSWORD", "ifeanyi"),
           },
           options: {
             authenticationDatabase: env("AUTHENTICATION_DATABASE", null),
