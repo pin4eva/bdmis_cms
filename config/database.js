@@ -1,45 +1,20 @@
-module.exports = ({ env }) => {
-  // test
-  const docker = env("DOCKER");
-  if (docker) {
-    return {
-      defaultConnection: "default",
-      connections: {
-        default: {
-          connector: "mongoose",
-          settings: {
-            host: env("DATABASE_HOST", "bdmis_mongo"),
-            srv: env.bool("DATABASE_SRV", false),
-            port: env.int("DATABASE_PORT", 27017),
-            database: env("DATABASE_NAME", "brighter_dawn_cms"),
-            username: env("DATABASE_USERNAME", "peter"),
-            password: env("DATABASE_PASSWORD", "ifeanyi"),
-          },
-          options: {
-            authenticationDatabase: env("AUTHENTICATION_DATABASE", null),
-            ssl: env.bool("DATABASE_SSL", false),
-          },
-        },
-      },
-    };
-  } else {
-    return {
-      defaultConnection: "default",
-      connections: {
-        default: {
-          connector: "mongoose",
-          settings: {
-            uri: env("DATABASE_URI", "mongodb://localhost/brigher_dawn_cms"),
-            srv: env.bool("DATABASE_SRV", true),
-            port: env.int("DATABASE_PORT", 27017),
-            database: env("DATABASE_NAME", "brighter_dawn_cms"),
-          },
-          options: {
-            authenticationDatabase: env("AUTHENTICATION_DATABASE", null),
-            ssl: env.bool("DATABASE_SSL", true),
-          },
-        },
-      },
-    };
-  }
-};
+const path = require("path");
+
+module.exports = ({ env }) => ({
+  connection: {
+    client: "postgres",
+    connection: {
+      host: env("DATABASE_HOST", "localhost"),
+      port: env.int("DATABASE_PORT", 5432),
+      database: env("DATABASE_NAME", "brighter_dawn_cms"),
+      user: env("DATABASE_USERNAME", "postgres"),
+      password: env("DATABASE_PASSWORD", "0000"),
+      schema: env("DATABASE_SCHEMA", "public"), // Not required
+      // ssl: {
+      //   rejectUnauthorized: env.bool("DATABASE_SSL_SELF", false),
+
+      // },
+    },
+    debug: true,
+  },
+});
