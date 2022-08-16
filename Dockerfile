@@ -4,7 +4,7 @@
 
 # ENV PORT=8001
 
-FROM node:14-alpine as builder
+FROM node:16-alpine as builder
 
 WORKDIR /app
 
@@ -18,7 +18,7 @@ COPY . .
 
 RUN yarn build
 
-FROM node:14-alpine
+FROM node:16-alpine
 
 WORKDIR /app
 
