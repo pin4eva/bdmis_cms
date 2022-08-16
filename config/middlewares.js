@@ -9,7 +9,7 @@ const prodOrigins = [
   "https://portal.bdmis.org",
   "http://0.0.0.0:8001",
   "http://localhost:8001",
-  "http://0.0.0.0:1337",
+
   "https://bdmis.vercel.app",
 ];
 const devOrigins = [
@@ -23,11 +23,13 @@ const devOrigins = [
   "http://localhost:8000",
   "http://localhost:8001",
   "http://localhost",
+  "http://0.0.0.0:1337",
+  "http://localhost:1337",
 ];
 
 module.exports = [
   "strapi::errors",
-  "strapi::security",
+  // "strapi::security",
   // 'strapi::cors',
   "strapi::poweredBy",
   "strapi::logger",
@@ -40,6 +42,20 @@ module.exports = [
     name: "strapi::cors",
     config: {
       origin: prodOrigins,
+    },
+  },
+  {
+    name: "strapi::security",
+    config: {
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          "connect-src": ["'self'", "https:"],
+          "img-src": ["'self'", "data:", "blob:", "res.cloudinary.com"],
+          "media-src": ["'self'", "data:", "blob:", "res.cloudinary.com"],
+          upgradeInsecureRequests: null,
+        },
+      },
     },
   },
 ];
